@@ -82,9 +82,27 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Job> searchJobs(String location, String type, String experienceLevel) {
-        // Implémentation basique, à adapter selon ton repo
-        // Par exemple, un repo avec méthode :
-        // List<Job> findByLocationAndTypeAndExperienceLevel(String location, String type, String experienceLevel);
-        return jobRepository.findByLocationAndTypeAndExperienceLevel(location, type, experienceLevel);
+        List<Job> jobs = jobRepository.findAll();
+
+        if (location != null && !location.isBlank()) {
+            jobs = jobs.stream()
+                    .filter(job -> location.equalsIgnoreCase(job.getLocation()))
+                    .toList();
+        }
+
+        if (type != null && !type.isBlank()) {
+            jobs = jobs.stream()
+                    .filter(job -> type.equalsIgnoreCase(job.getType()))
+                    .toList();
+        }
+
+        if (experienceLevel != null && !experienceLevel.isBlank()) {
+            jobs = jobs.stream()
+                    .filter(job -> experienceLevel.equalsIgnoreCase(job.getExperienceLevel()))
+                    .toList();
+        }
+
+        return jobs;
     }
+
 }
