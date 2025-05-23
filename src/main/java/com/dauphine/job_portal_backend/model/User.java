@@ -29,7 +29,17 @@ public class User {
     @Column(name = "role", nullable = false)
     private String role; // "RECRUITER" ou "JOB_SEEKER"
 
-    public User() {
+    
+    public User(String firstName, String lastName, String email, String phone, String role) {
+		this.id=UUID.randomUUID();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.email = email;
+		this.phone = phone;
+		this.role = role;
+	}
+
+	public User() {
         this.id = UUID.randomUUID();
     }
     

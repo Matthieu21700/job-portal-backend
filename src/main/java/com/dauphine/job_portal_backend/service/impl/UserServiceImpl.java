@@ -2,6 +2,7 @@ package com.dauphine.job_portal_backend.service.impl;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -33,11 +34,15 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(User user) {
-        // Ex: vérifier que l'email n'existe pas déjà
-        if (userRepository.existsByEmail(user.getEmail())) {
-            throw new RuntimeException("Email already in use");
-        }
-        return userRepository.save(user);
+    	User userToSave = new User(
+    		    user.getFirstName(),
+    		    user.getLastName(),
+    		    user.getEmail(),
+    		    user.getPhone(),
+    		    user.getRole()
+    		);
+
+    		return userRepository.save(userToSave);
     }
 
     @Override
@@ -69,5 +74,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public boolean emailExists(String email) {
         return userRepository.existsByEmail(email);
+    }
+    @Override
+    public Optional<UUID> getIdByEmail(String mail) {
+    	return userRepository.findIdByEmail(mail);
     }
 }

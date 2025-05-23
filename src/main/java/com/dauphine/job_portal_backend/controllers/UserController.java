@@ -1,6 +1,7 @@
 package com.dauphine.job_portal_backend.controllers;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.http.HttpStatus;
@@ -41,14 +42,8 @@ public class UserController {
 
     // POST create user
     @PostMapping
-    public ResponseEntity<?> createUser(@RequestBody User user) {
-        try {
-            User createdUser = userService.createUser(user);
-            return new ResponseEntity<>(createdUser, HttpStatus.CREATED);
-        } catch (RuntimeException e) {
-            // Par exemple : email déjà utilisé
-            return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
-        }
+    public User createUser(@RequestBody User user) {
+        return userService.createUser(user);
     }
 
     // PUT update user
@@ -69,5 +64,9 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.noContent().build();
+    }
+    @GetMapping("/{mail}")
+    public Optional<UUID> getIdByEmail(@PathVariable String mail){
+    	return userService.getIdByEmail(mail);
     }
 }
