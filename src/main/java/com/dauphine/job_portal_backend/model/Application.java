@@ -8,6 +8,27 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "applications")
 public class Application {
+	@Id
+    @Column(name = "id")
+    private UUID id;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @JoinColumn(name = "job_id")
+    private Job job;
+
+    @Column(name = "applied_at")
+    private LocalDateTime appliedAt;
+
+    public Application() {
+        this.id = UUID.randomUUID();
+        this.appliedAt = LocalDateTime.now();
+    }
+
+    // Getters et setters
 
     public UUID getId() {
 		return id;
@@ -41,25 +62,4 @@ public class Application {
 		this.appliedAt = appliedAt;
 	}
 
-	@Id
-    @Column(name = "id")
-    private UUID id;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
-
-    @ManyToOne
-    @JoinColumn(name = "job_id")
-    private Job job;
-
-    @Column(name = "applied_at")
-    private LocalDateTime appliedAt;
-
-    public Application() {
-        this.id = UUID.randomUUID();
-        this.appliedAt = LocalDateTime.now();
-    }
-
-    // Getters et setters
 }

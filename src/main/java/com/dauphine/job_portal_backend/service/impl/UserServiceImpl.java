@@ -1,4 +1,4 @@
-package com.dauphine.job_portal_backend.service;
+package com.dauphine.job_portal_backend.service.impl;
 
 
 import java.util.List;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.dauphine.job_portal_backend.model.User;
 import com.dauphine.job_portal_backend.repository.UserRepository;
+import com.dauphine.job_portal_backend.service.UserService;
 
 
 

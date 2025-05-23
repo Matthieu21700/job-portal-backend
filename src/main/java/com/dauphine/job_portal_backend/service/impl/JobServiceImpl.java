@@ -1,4 +1,4 @@
-package com.dauphine.job_portal_backend.service;
+package com.dauphine.job_portal_backend.service.impl;
 
 import java.util.List;
 import java.util.UUID;
@@ -11,6 +11,7 @@ import com.dauphine.job_portal_backend.dto.JobRequestDto;
 import com.dauphine.job_portal_backend.model.Job;
 import com.dauphine.job_portal_backend.repository.JobRepository;
 import com.dauphine.job_portal_backend.repository.UserRepository;
+import com.dauphine.job_portal_backend.service.JobService;
 
 import jakarta.persistence.EntityNotFoundException;
 import java.util.Optional; 
