@@ -76,7 +76,10 @@ public class UserServiceImpl implements UserService {
         return userRepository.existsByEmail(email);
     }
     @Override
-    public Optional<UUID> getIdByEmail(String mail) {
-    	return userRepository.findIdByEmail(mail);
+    public UUID getUserIdByEmail(String email) {
+        return userRepository.findByEmail(email)
+                .map(user -> user.getId())
+                .orElseThrow(() -> new RuntimeException("Utilisateur avec l’email " + email + " introuvable"));
     }
+
 }

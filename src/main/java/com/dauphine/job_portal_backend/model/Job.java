@@ -40,6 +40,22 @@ public class Job {
 
     @Column(name = "salary_min")
     private BigDecimal salaryMin;
+    
+    @Column(name = "salary_max")
+    private BigDecimal salaryMax;
+
+    @Column(name = "type")
+    private String type;
+
+    @Column(name = "experience_level")
+    private String experienceLevel;
+
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public UUID getId() {
 		return id;
@@ -137,26 +153,29 @@ public class Job {
 		this.user = user;
 	}
 
-	@Column(name = "salary_max")
-    private BigDecimal salaryMax;
-
-    @Column(name = "type")
-    private String type;
-
-    @Column(name = "experience_level")
-    private String experienceLevel;
-
-    @Column(name = "created_at")
-    private LocalDateTime createdAt;
-
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
+	
 
     public Job() {
         this.id = UUID.randomUUID();
         this.createdAt = LocalDateTime.now();
     }
+
+	public Job(String title, String description, String responsibilities, String qualifications, String location,
+			BigDecimal salaryMin, BigDecimal salaryMax, String type, String experienceLevel, LocalDateTime createdAt,
+			User user) {
+		super();
+		this.title = title;
+		this.description = description;
+		this.responsibilities = responsibilities;
+		this.qualifications = qualifications;
+		this.location = location;
+		this.salaryMin = salaryMin;
+		this.salaryMax = salaryMax;
+		this.type = type;
+		this.experienceLevel = experienceLevel;
+		this.createdAt = createdAt;
+		this.user = user;
+	}
 
     // Getters et setters
 }

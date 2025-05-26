@@ -42,14 +42,13 @@ public class JobServiceImpl implements JobService {
     @Override
     public Job createJob(Job job) {
         // Récupérer l'utilisateur lié au job
-        UUID userId = job.getUser().getId();  // Attention : ici tu pars du principe que le user est déjà partiellement instancié
+        UUID userId = job.getUser().getId(); // Attention : ici tu pars du principe que le user est déjà partiellement instancié
 
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) {
             throw new EntityNotFoundException("Utilisateur avec l'ID " + userId + " introuvable");
         }
 
-        job.setUser(optionalUser.get()); // assure qu'on lie un user réellement existant et géré par le contexte JPA
         return jobRepository.save(job);
     }
 

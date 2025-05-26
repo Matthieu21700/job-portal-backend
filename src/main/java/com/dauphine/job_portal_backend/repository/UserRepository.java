@@ -12,5 +12,5 @@ import com.dauphine.job_portal_backend.model.User;
 public interface UserRepository extends JpaRepository<User, UUID> {
     Optional<User> findByEmail(String email);
     boolean existsByEmail(String email);
-    Optional<UUID> findIdByEmail(String email);
+    Optional<User> findIdByEmail(String email);
 }

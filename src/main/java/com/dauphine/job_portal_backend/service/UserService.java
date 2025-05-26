@@ -17,5 +17,5 @@ public interface UserService {
     boolean deleteUser(UUID id);
     User getUserByEmail(String email);
     boolean emailExists(String email);
-    public Optional<UUID> getIdByEmail(String mail) ;
+    public UUID getUserIdByEmail(String mail) ;
 }

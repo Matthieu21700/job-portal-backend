@@ -65,8 +65,9 @@ public class UserController {
         }
         return ResponseEntity.noContent().build();
     }
-    @GetMapping("/{mail}")
-    public Optional<UUID> getIdByEmail(@PathVariable String mail){
-    	return userService.getIdByEmail(mail);
+    @GetMapping("/mail")
+    public ResponseEntity<UUID> getUserIdByEmail(@RequestParam String email) {
+        UUID userId = userService.getUserIdByEmail(email);
+        return ResponseEntity.ok(userId);
     }
 }
