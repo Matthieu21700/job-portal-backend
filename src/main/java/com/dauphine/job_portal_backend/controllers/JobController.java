@@ -70,5 +70,10 @@ public class JobController {
                                 @RequestParam(required = false) String experienceLevel) {
         return jobService.searchJobs(location, type, experienceLevel);
     }
+    
+    @GetMapping("/user/{userId}")
+    public List<Job> getJobsByUserId(@PathVariable UUID userId) {
+        return jobService.getJobsByUserId(userId);
+    }
 
 }
