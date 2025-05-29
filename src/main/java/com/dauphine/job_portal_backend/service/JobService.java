@@ -12,7 +12,7 @@ public interface JobService {
     Job createJob(Job job);
     Job updateJob(UUID id, Job job);
     boolean deleteJob(UUID id);
-    
+    List<Job> getJobsByUserId(UUID userId);
     // Méthode pour chercher avec filtres (exemple simple)
     List<Job> searchJobs(String location, String type, String experienceLevel);
 }

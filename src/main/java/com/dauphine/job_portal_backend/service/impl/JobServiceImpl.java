@@ -38,6 +38,10 @@ public class JobServiceImpl implements JobService {
     public Job getJobById(UUID id) {
         return jobRepository.findById(id).orElse(null);
     }
+    @Override
+    public List<Job> getJobsByUserId(UUID userId) {
+        return jobRepository.findByUserId(userId);
+    }
 
     @Override
     public Job createJob(Job job) {
