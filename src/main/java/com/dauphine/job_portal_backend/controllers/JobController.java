@@ -5,6 +5,7 @@ import com.dauphine.job_portal_backend.service.JobService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,8 +68,11 @@ public class JobController {
     @GetMapping("/search")
     public List<Job> searchJobs(@RequestParam(required = false) String location,
                                 @RequestParam(required = false) String type,
-                                @RequestParam(required = false) String experienceLevel) {
-        return jobService.searchJobs(location, type, experienceLevel);
+                                @RequestParam(required = false) String CompanyName,
+                                @RequestParam(required = false) String experienceLevel,
+                                @RequestParam(required = false) BigDecimal salaryMin,
+                                @RequestParam(required = false) BigDecimal salaryMax) {
+        return jobService.searchJobs(location, type, experienceLevel,CompanyName,salaryMin,salaryMax);
     }
     
     @GetMapping("/user/{userId}")

@@ -1,5 +1,6 @@
 package com.dauphine.job_portal_backend.service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -14,5 +15,6 @@ public interface JobService {
     boolean deleteJob(UUID id);
     List<Job> getJobsByUserId(UUID userId);
     // Méthode pour chercher avec filtres (exemple simple)
-    List<Job> searchJobs(String location, String type, String experienceLevel);
+    List<Job> searchJobs(String location, String type, String experienceLevel,
+            String companyName, BigDecimal salaryMin, BigDecimal salaryMax);
 }

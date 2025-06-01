@@ -56,8 +56,20 @@ public class Job {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    
+    @Column(name = "company_name")
+    private String companyName;
 
-    public UUID getId() {
+
+    public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public UUID getId() {
 		return id;
 	}
 
@@ -161,7 +173,7 @@ public class Job {
     }
 
 	public Job(String title, String description, String responsibilities, String qualifications, String location,
-			BigDecimal salaryMin, BigDecimal salaryMax, String type, String experienceLevel, LocalDateTime createdAt,
+			BigDecimal salaryMin, BigDecimal salaryMax,String companyName, String type, String experienceLevel, LocalDateTime createdAt,
 			User user) {
 		super();
 		this.title = title;
@@ -171,11 +183,13 @@ public class Job {
 		this.location = location;
 		this.salaryMin = salaryMin;
 		this.salaryMax = salaryMax;
+		this.companyName=companyName;
 		this.type = type;
 		this.experienceLevel = experienceLevel;
 		this.createdAt = createdAt;
 		this.user = user;
 	}
+
 
     // Getters et setters
 }

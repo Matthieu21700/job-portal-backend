@@ -1,5 +1,6 @@
 package com.dauphine.job_portal_backend.service.impl;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.UUID;
 
@@ -67,6 +68,7 @@ public class JobServiceImpl implements JobService {
                 job.setQualifications(updatedJob.getQualifications());
                 job.setLocation(updatedJob.getLocation());
                 job.setSalaryMin(updatedJob.getSalaryMin());
+                job.setCompanyName(updatedJob.getCompanyName());
                 job.setSalaryMax(updatedJob.getSalaryMax());
                 job.setType(updatedJob.getType());
                 job.setExperienceLevel(updatedJob.getExperienceLevel());
@@ -84,7 +86,8 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public List<Job> searchJobs(String location, String type, String experienceLevel) {
+    public List<Job> searchJobs(String location, String type, String experienceLevel,
+                                String companyName, BigDecimal salaryMin, BigDecimal salaryMax) {
         List<Job> jobs = jobRepository.findAll();
 
         if (location != null && !location.isBlank()) {
@@ -105,7 +108,29 @@ public class JobServiceImpl implements JobService {
                     .toList();
         }
 
+        if (companyName != null && !companyName.isBlank()) {
+            jobs = jobs.stream()
+                    .filter(job -> job.getCompanyName() != null && companyName.equalsIgnoreCase(job.getCompanyName()))
+                    .toList();
+        }
+
+        if (salaryMin != null) {
+            jobs = jobs.stream()
+                    .filter(job -> job.getSalaryMin() != null && job.getSalaryMin().compareTo(salaryMin) >= 0)
+                    .toList();
+        }
+
+        if (salaryMax != null) {
+            jobs = jobs.stream()
+                    .filter(job -> job.getSalaryMax() != null && job.getSalaryMax().compareTo(salaryMax) <= 0)
+                    .toList();
+        }
+
         return jobs;
     }
+
+
+	
+
 
 }
