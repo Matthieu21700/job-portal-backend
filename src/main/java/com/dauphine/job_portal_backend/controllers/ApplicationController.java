@@ -1,6 +1,7 @@
 package com.dauphine.job_portal_backend.controllers;
 
 import com.dauphine.job_portal_backend.model.Application;
+import com.dauphine.job_portal_backend.model.Job;
 import com.dauphine.job_portal_backend.service.ApplicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,10 @@ public class ApplicationController {
     public ResponseEntity<Void> deleteApplication(@PathVariable UUID id) {
         applicationService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+    
+    @GetMapping("/user/{userId}")
+    public List<Application> getApplicationsByUserId(@PathVariable UUID userId) {
+        return applicationService.getApplicationsByUserId(userId);
     }
 }

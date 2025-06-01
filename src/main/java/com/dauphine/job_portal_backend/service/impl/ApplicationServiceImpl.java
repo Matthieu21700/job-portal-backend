@@ -46,4 +46,9 @@ public class ApplicationServiceImpl implements ApplicationService {
     public void delete(UUID id) {
         applicationRepository.deleteById(id);
     }
+
+	@Override
+	public List<Application> getApplicationsByUserId(UUID id) {
+		return applicationRepository.findByUserId(id);
+	}
 }

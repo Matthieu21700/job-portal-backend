@@ -11,4 +11,5 @@ public interface ApplicationService {
     List<Application> getAll();
     Optional<Application> getById(UUID id);
     void delete(UUID id);
+    List<Application> getApplicationsByUserId(UUID id);
 }
