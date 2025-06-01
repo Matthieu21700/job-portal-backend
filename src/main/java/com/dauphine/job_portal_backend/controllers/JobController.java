@@ -68,11 +68,12 @@ public class JobController {
     @GetMapping("/search")
     public List<Job> searchJobs(@RequestParam(required = false) String location,
                                 @RequestParam(required = false) String type,
-                                @RequestParam(required = false) String CompanyName,
+                                @RequestParam(required = false) String companyName,
+                                @RequestParam(required = false) String description,
                                 @RequestParam(required = false) String experienceLevel,
                                 @RequestParam(required = false) BigDecimal salaryMin,
                                 @RequestParam(required = false) BigDecimal salaryMax) {
-        return jobService.searchJobs(location, type, experienceLevel,CompanyName,salaryMin,salaryMax);
+        return jobService.searchJobs(location, type, experienceLevel, companyName, description,salaryMin,salaryMax);
     }
     
     @GetMapping("/user/{userId}")

@@ -1,8 +1,10 @@
 package com.dauphine.job_portal_backend.service.impl;
 
 import java.math.BigDecimal;
+
 import java.util.List;
 import java.util.UUID;
+
 
 
 
@@ -87,7 +89,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Job> searchJobs(String location, String type, String experienceLevel,
-                                String companyName, BigDecimal salaryMin, BigDecimal salaryMax) {
+                                String companyName,String description, BigDecimal salaryMin, BigDecimal salaryMax) {
         List<Job> jobs = jobRepository.findAll();
 
         if (location != null && !location.isBlank()) {
@@ -111,6 +113,11 @@ public class JobServiceImpl implements JobService {
         if (companyName != null && !companyName.isBlank()) {
             jobs = jobs.stream()
                     .filter(job -> job.getCompanyName() != null && companyName.equalsIgnoreCase(job.getCompanyName()))
+                    .toList();
+        }
+        if (description != null && !description.isBlank()) {
+            jobs = jobs.stream()
+                    .filter(job -> job.getDescription() != null && description.equalsIgnoreCase(job.getDescription()))
                     .toList();
         }
 

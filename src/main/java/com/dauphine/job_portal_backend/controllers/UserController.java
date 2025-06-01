@@ -70,4 +70,9 @@ public class UserController {
         UUID userId = userService.getUserIdByEmail(email);
         return ResponseEntity.ok(userId);
     }
+    @GetMapping("/role")
+    public ResponseEntity<String> getRoleById(@RequestParam UUID id) {
+       String role =userService.getRoleById(id);
+       return ResponseEntity.ok(role);
+    }
 }

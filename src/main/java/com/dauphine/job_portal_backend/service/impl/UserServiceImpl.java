@@ -82,4 +82,9 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("Utilisateur avec l’email " + email + " introuvable"));
     }
 
+	@Override
+	public String getRoleById(UUID id) {
+		return userRepository.getRoleById(id);
+	}
+
 }

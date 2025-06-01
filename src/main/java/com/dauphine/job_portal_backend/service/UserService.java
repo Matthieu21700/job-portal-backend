@@ -18,4 +18,5 @@ public interface UserService {
     User getUserByEmail(String email);
     boolean emailExists(String email);
     public UUID getUserIdByEmail(String mail) ;
+    String getRoleById(UUID id);
 }

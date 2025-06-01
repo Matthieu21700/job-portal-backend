@@ -16,5 +16,5 @@ public interface JobService {
     List<Job> getJobsByUserId(UUID userId);
     // Méthode pour chercher avec filtres (exemple simple)
     List<Job> searchJobs(String location, String type, String experienceLevel,
-            String companyName, BigDecimal salaryMin, BigDecimal salaryMax);
+            String companyName, String description,BigDecimal salaryMin, BigDecimal salaryMax);
 }
