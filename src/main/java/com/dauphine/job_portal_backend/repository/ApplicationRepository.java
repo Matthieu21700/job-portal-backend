@@ -9,5 +9,6 @@ import com.dauphine.job_portal_backend.model.ApplicationSkill;
 
 public interface ApplicationRepository extends JpaRepository<Application,UUID>{
 	List<Application> findByUserId(UUID userId);
+	List<Application> findByJobId(UUID jobId);
 
 }

@@ -51,4 +51,8 @@ public class ApplicationServiceImpl implements ApplicationService {
 	public List<Application> getApplicationsByUserId(UUID id) {
 		return applicationRepository.findByUserId(id);
 	}
+    @Override
+    public List<Application> getApplicationsByJobId(UUID jobId) {
+        return applicationRepository.findByJobId(jobId);
+    }
 }
