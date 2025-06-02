@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import java.util.List;
 import java.util.UUID;
+import org.springframework.data.domain.Sort;
 
 
 
@@ -34,7 +35,7 @@ public class JobServiceImpl implements JobService {
 
     @Override
     public List<Job> getAllJobs() {
-        return jobRepository.findAll();
+        return jobRepository.findAll(Sort.by(Sort.Direction.DESC, "createdAt"));
     }
 
     @Override

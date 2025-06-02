@@ -100,4 +100,47 @@ public class ApplicationController {
         List<Application> applications = applicationService.getApplicationsByJobId(jobId);
         return ResponseEntity.ok(applications);
     }
+
+    // NOUVEAUX ENDPOINTS
+    @PutMapping("/{applicationId}/accept")
+    public ResponseEntity<Application> acceptApplication(
+            @PathVariable UUID applicationId,
+            @RequestBody Map<String, String> payload) {
+        try {
+            String message = payload.get("message");
+            Application updatedApplication = applicationService.acceptApplication(applicationId, message);
+            return ResponseEntity.ok(updatedApplication);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{applicationId}/reject")
+    public ResponseEntity<Application> rejectApplication(
+            @PathVariable UUID applicationId,
+            @RequestBody Map<String, String> payload) {
+        try {
+            String message = payload.get("message");
+            Application updatedApplication = applicationService.rejectApplication(applicationId, message);
+            return ResponseEntity.ok(updatedApplication);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{applicationId}/mark-read")
+    public ResponseEntity<Application> markNotificationAsRead(@PathVariable UUID applicationId) {
+        try {
+            Application updatedApplication = applicationService.markNotificationAsRead(applicationId);
+            return ResponseEntity.ok(updatedApplication);
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping("/notifications/{userId}")
+    public ResponseEntity<List<Application>> getUnreadNotifications(@PathVariable UUID userId) {
+        List<Application> notifications = applicationService.getUnreadNotifications(userId);
+        return ResponseEntity.ok(notifications);
+    }
 }

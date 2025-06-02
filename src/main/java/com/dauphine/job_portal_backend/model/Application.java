@@ -23,7 +23,23 @@ public class Application {
 	@Column(name = "applied_at")
 	private LocalDateTime appliedAt;
 
-	// NOUVEAUX CHAMPS pour les informations de candidature
+	// NOUVEAU CHAMP pour le statut
+	@Column(name = "status")
+	private String status = "PENDING"; // PENDING, ACCEPTED, REJECTED
+
+	// NOUVEAU CHAMP pour la date de décision
+	@Column(name = "decided_at")
+	private LocalDateTime decidedAt;
+
+	// NOUVEAU CHAMP pour le message du recruteur
+	@Column(name = "recruiter_message")
+	private String recruiterMessage;
+
+	// NOUVEAU CHAMP pour marquer si la notification a été lue
+	@Column(name = "notification_read")
+	private boolean notificationRead = false;
+
+	// Champs existants pour les informations de candidature
 	@Column(name = "first_name")
 	private String firstName;
 
@@ -37,18 +53,19 @@ public class Application {
 	private String phone;
 
 	@Column(name = "skills", columnDefinition = "TEXT")
-	private String skills; // JSON string des compétences
+	private String skills;
 
 	@Column(name = "work_experiences", columnDefinition = "TEXT")
-	private String workExperiences; // JSON string des expériences
+	private String workExperiences;
 
 	public Application() {
 		this.id = UUID.randomUUID();
 		this.appliedAt = LocalDateTime.now();
+		this.status = "PENDING";
+		this.notificationRead = false;
 	}
 
-	// Getters et setters
-
+	// Getters et setters existants
 	public UUID getId() {
 		return id;
 	}
@@ -127,5 +144,38 @@ public class Application {
 
 	public void setWorkExperiences(String workExperiences) {
 		this.workExperiences = workExperiences;
+	}
+
+	// NOUVEAUX Getters et setters
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public LocalDateTime getDecidedAt() {
+		return decidedAt;
+	}
+
+	public void setDecidedAt(LocalDateTime decidedAt) {
+		this.decidedAt = decidedAt;
+	}
+
+	public String getRecruiterMessage() {
+		return recruiterMessage;
+	}
+
+	public void setRecruiterMessage(String recruiterMessage) {
+		this.recruiterMessage = recruiterMessage;
+	}
+
+	public boolean isNotificationRead() {
+		return notificationRead;
+	}
+
+	public void setNotificationRead(boolean notificationRead) {
+		this.notificationRead = notificationRead;
 	}
 }
