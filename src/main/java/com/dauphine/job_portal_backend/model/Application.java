@@ -23,23 +23,18 @@ public class Application {
 	@Column(name = "applied_at")
 	private LocalDateTime appliedAt;
 
-	// NOUVEAU CHAMP pour le statut
 	@Column(name = "status")
-	private String status = "PENDING"; // PENDING, ACCEPTED, REJECTED
+	private String status = "PENDING";
 
-	// NOUVEAU CHAMP pour la date de décision
 	@Column(name = "decided_at")
 	private LocalDateTime decidedAt;
 
-	// NOUVEAU CHAMP pour le message du recruteur
 	@Column(name = "recruiter_message")
 	private String recruiterMessage;
 
-	// NOUVEAU CHAMP pour marquer si la notification a été lue
 	@Column(name = "notification_read")
 	private boolean notificationRead = false;
 
-	// Champs existants pour les informations de candidature
 	@Column(name = "first_name")
 	private String firstName;
 
@@ -65,7 +60,6 @@ public class Application {
 		this.notificationRead = false;
 	}
 
-	// Getters et setters existants
 	public UUID getId() {
 		return id;
 	}
@@ -146,7 +140,6 @@ public class Application {
 		this.workExperiences = workExperiences;
 	}
 
-	// NOUVEAUX Getters et setters
 	public String getStatus() {
 		return status;
 	}

@@ -27,7 +27,7 @@ public class User {
     private String phone;
 
     @Column(name = "role", nullable = false)
-    private String role; // "RECRUITER" ou "JOB_SEEKER"
+    private String role;
 
     
     public User(String firstName, String lastName, String email, String phone, String role) {

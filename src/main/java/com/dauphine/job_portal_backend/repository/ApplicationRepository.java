@@ -10,8 +10,6 @@ import com.dauphine.job_portal_backend.model.Application;
 public interface ApplicationRepository extends JpaRepository<Application, UUID> {
 	List<Application> findByUserId(UUID userId);
 	List<Application> findByJobId(UUID jobId);
-
-	// NOUVELLES MÉTHODES
 	List<Application> findByUserIdAndNotificationReadFalseAndStatusNot(UUID userId, String status);
 	List<Application> findByUserIdAndStatus(UUID userId, String status);
 }

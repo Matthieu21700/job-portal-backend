@@ -18,19 +18,16 @@ public class UserController {
 
     private final UserService userService;
 
-    // Injection par constructeur
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
-    // GET all users
     @GetMapping
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getAllUsers();
         return ResponseEntity.ok(users);
     }
 
-    // GET user by id
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable UUID id) {
         User user = userService.getUserById(id);
@@ -40,13 +37,11 @@ public class UserController {
         return ResponseEntity.ok(user);
     }
 
-    // POST create user
     @PostMapping
     public User createUser(@RequestBody User user) {
         return userService.createUser(user);
     }
 
-    // PUT update user
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUser(@PathVariable UUID id, @RequestBody User user) {
         User updatedUser = userService.updateUser(id, user);
@@ -56,7 +51,6 @@ public class UserController {
         return ResponseEntity.ok(updatedUser);
     }
 
-    // DELETE user
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteUser(@PathVariable UUID id) {
         boolean deleted = userService.deleteUser(id);

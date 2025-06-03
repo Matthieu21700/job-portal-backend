@@ -24,7 +24,7 @@ public class SkillServiceImpl implements SkillService {
 
     @Override
     public Skill createSkill(Skill skill) {
-        skill.setId(UUID.randomUUID()); // assure qu’un ID est généré
+        skill.setId(UUID.randomUUID());
         return skillRepository.save(skill);
     }
 

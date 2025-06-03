@@ -1,24 +1,18 @@
 package com.dauphine.job_portal_backend.service.impl;
 
 import java.math.BigDecimal;
-
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.domain.Sort;
-
-
-
-
 import org.springframework.stereotype.Service;
-
-import com.dauphine.job_portal_backend.dto.JobRequestDto;
 import com.dauphine.job_portal_backend.model.Job;
 import com.dauphine.job_portal_backend.repository.JobRepository;
 import com.dauphine.job_portal_backend.repository.UserRepository;
 import com.dauphine.job_portal_backend.service.JobService;
-
 import jakarta.persistence.EntityNotFoundException;
-import java.util.Optional; 
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import com.dauphine.job_portal_backend.model.User;
 
 
@@ -44,14 +38,15 @@ public class JobServiceImpl implements JobService {
     }
     @Override
     public List<Job> getJobsByUserId(UUID userId) {
-        return jobRepository.findByUserId(userId);
+        List<Job> jobs = jobRepository.findByUserId(userId);
+        return jobs.stream()
+                .sorted((job1, job2) -> job2.getCreatedAt().compareTo(job1.getCreatedAt()))
+                .collect(Collectors.toList());
     }
 
     @Override
     public Job createJob(Job job) {
-        // Récupérer l'utilisateur lié au job
-        UUID userId = job.getUser().getId(); // Attention : ici tu pars du principe que le user est déjà partiellement instancié
-
+        UUID userId = job.getUser().getId();
         Optional<User> optionalUser = userRepository.findById(userId);
         if (optionalUser.isEmpty()) {
             throw new EntityNotFoundException("Utilisateur avec l'ID " + userId + " introuvable");
@@ -136,9 +131,4 @@ public class JobServiceImpl implements JobService {
 
         return jobs;
     }
-
-
-	
-
-
 }

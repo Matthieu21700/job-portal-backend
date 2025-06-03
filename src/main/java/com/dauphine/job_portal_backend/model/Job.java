@@ -191,6 +191,5 @@ public class Job {
 	}
 
 
-    // Getters et setters
 }
 

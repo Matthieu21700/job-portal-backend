@@ -11,7 +11,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/jobs")
-@CrossOrigin(origins = "*") // Autorise les requêtes depuis Angular (modifiable)
+@CrossOrigin(origins = "*")
 public class JobController {
 
     private final JobService jobService;
@@ -19,14 +19,11 @@ public class JobController {
     public JobController(JobService jobService) {
         this.jobService = jobService;
     }
-
-    // 🔹 Récupérer toutes les annonces
     @GetMapping
     public ResponseEntity<List<Job>> getAllJobs() {
         return ResponseEntity.ok(jobService.getAllJobs());
     }
 
-    // 🔹 Récupérer une annonce par ID
     @GetMapping("/{id}")
     public ResponseEntity<Job> getJobById(@PathVariable UUID id) {
         Job job = jobService.getJobById(id);
@@ -37,14 +34,12 @@ public class JobController {
         }
     }
 
-    // 🔹 Créer une nouvelle annonce
     @PostMapping
     public ResponseEntity<Job> createJob(@RequestBody Job job) {
         Job created = jobService.createJob(job);
         return ResponseEntity.ok(created);
     }
 
-    // 🔹 Mettre à jour une annonce
     @PutMapping("/{id}")
     public ResponseEntity<Job> updateJob(@PathVariable UUID id, @RequestBody Job job) {
         Job updated = jobService.updateJob(id, job);
@@ -54,8 +49,6 @@ public class JobController {
             return ResponseEntity.notFound().build();
         }
     }
-
-    // 🔹 Supprimer une annonce
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteJob(@PathVariable UUID id) {
         if (jobService.deleteJob(id)) {
@@ -75,10 +68,18 @@ public class JobController {
                                 @RequestParam(required = false) BigDecimal salaryMax) {
         return jobService.searchJobs(location, type, experienceLevel, companyName, description,salaryMin,salaryMax);
     }
-    
+
     @GetMapping("/user/{userId}")
     public List<Job> getJobsByUserId(@PathVariable UUID userId) {
         return jobService.getJobsByUserId(userId);
     }
 
+    @GetMapping("/{jobId}/can-edit/{userId}")
+    public ResponseEntity<Boolean> canUserEditJob(@PathVariable UUID jobId, @PathVariable UUID userId) {
+        Job job = jobService.getJobById(jobId);
+        if (job != null && job.getUser() != null && job.getUser().getId().equals(userId)) {
+            return ResponseEntity.ok(true);
+        }
+        return ResponseEntity.ok(false);
+    }
 }

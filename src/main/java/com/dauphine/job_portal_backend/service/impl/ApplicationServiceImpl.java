@@ -61,7 +61,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             application.setStatus("ACCEPTED");
             application.setDecidedAt(LocalDateTime.now());
             application.setRecruiterMessage(recruiterMessage);
-            application.setNotificationRead(false); // Nouvelle notification
+            application.setNotificationRead(false);
             return applicationRepository.save(application);
         }
         throw new RuntimeException("Application not found with id: " + applicationId);
@@ -75,7 +75,7 @@ public class ApplicationServiceImpl implements ApplicationService {
             application.setStatus("REJECTED");
             application.setDecidedAt(LocalDateTime.now());
             application.setRecruiterMessage(recruiterMessage);
-            application.setNotificationRead(false); // Nouvelle notification
+            application.setNotificationRead(false);
             return applicationRepository.save(application);
         }
         throw new RuntimeException("Application not found with id: " + applicationId);

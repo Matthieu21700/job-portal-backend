@@ -13,8 +13,6 @@ public interface ApplicationService {
     void delete(UUID id);
     List<Application> getApplicationsByUserId(UUID id);
     List<Application> getApplicationsByJobId(UUID jobId);
-
-    // NOUVELLES MÉTHODES
     Application acceptApplication(UUID applicationId, String recruiterMessage);
     Application rejectApplication(UUID applicationId, String recruiterMessage);
     Application markNotificationAsRead(UUID applicationId);
