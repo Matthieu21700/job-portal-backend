@@ -14,6 +14,8 @@ public interface JobService {
     Job updateJob(UUID id, Job job);
     boolean deleteJob(UUID id);
     List<Job> getJobsByUserId(UUID userId);
-    List<Job> searchJobs(String location, String type, String experienceLevel,
+    List<Job> searchJobs(String titre,String location, String type, String experienceLevel,
             String companyName, String description,BigDecimal salaryMin, BigDecimal salaryMax);
+    public List<Job> searchJobsByUserId(UUID id,String titre,String location, String type, String experienceLevel,
+                                        String companyName, String description, BigDecimal salaryMin, BigDecimal salaryMax);
 }

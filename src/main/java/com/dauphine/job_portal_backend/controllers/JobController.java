@@ -59,14 +59,15 @@ public class JobController {
     }
 
     @GetMapping("/search")
-    public List<Job> searchJobs(@RequestParam(required = false) String location,
+    public List<Job> searchJobs(@RequestParam(required = false) String titre,
+                                @RequestParam(required = false) String location,
                                 @RequestParam(required = false) String type,
                                 @RequestParam(required = false) String companyName,
                                 @RequestParam(required = false) String description,
                                 @RequestParam(required = false) String experienceLevel,
                                 @RequestParam(required = false) BigDecimal salaryMin,
                                 @RequestParam(required = false) BigDecimal salaryMax) {
-        return jobService.searchJobs(location, type, experienceLevel, companyName, description,salaryMin,salaryMax);
+        return jobService.searchJobs(titre,location, type, experienceLevel, companyName, description,salaryMin,salaryMax);
     }
 
     @GetMapping("/user/{userId}")
@@ -81,5 +82,17 @@ public class JobController {
             return ResponseEntity.ok(true);
         }
         return ResponseEntity.ok(false);
+    }
+    @GetMapping("/search/{userId}")
+    public List<Job> searchJobsByUserId(@PathVariable UUID userId,
+                                @RequestParam(required = false) String titre,
+                                @RequestParam(required = false) String location,
+                                @RequestParam(required = false) String type,
+                                @RequestParam(required = false) String companyName,
+                                @RequestParam(required = false) String description,
+                                @RequestParam(required = false) String experienceLevel,
+                                @RequestParam(required = false) BigDecimal salaryMin,
+                                @RequestParam(required = false) BigDecimal salaryMax) {
+        return jobService.searchJobsByUserId(userId,titre,location, type, experienceLevel, companyName, description,salaryMin,salaryMax);
     }
 }
